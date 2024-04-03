@@ -17,7 +17,25 @@
                 // Se o código não foi utilizado ainda, marcar como utilizado e exibir mensagem de código liberado
                 localStorage.setItem(codigoInserido, new Date().toLocaleString()); // Armazenar a data e hora do uso
                 document.getElementById("mensagem").innerText = "Código Liberado!";
+                
+                // Chamar a função para chamar o script do Google Apps Script
+                chamarScriptGoogleApps(codigoInserido);
             }
+        }
+
+        // Função para chamar o script do Google Apps Script
+        function chamarScriptGoogleApps(codigoInserido) {
+            var urlScript = 'https://script.google.com/d/1zQ3Qw8YtvT8s66kEPoR8eyt2GEnTYl-mVYt5Arr9DmY2UoBRYoTCBRin/edit?usp=sharing'; // Substitua pelo URL da sua Web App do Google Apps Script
+            
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log('Script do Google Apps chamado com sucesso!');
+                }
+            };
+            xhttp.open("POST", urlScript, true);
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send("codigo=" + codigoInserido);
         }
     </script>
 </head>
