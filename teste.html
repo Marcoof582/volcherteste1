@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificação de Código Secreto</title>
+    <script>
+        function verificarCodigo() {
+            var codigoInserido = document.getElementById("codigo").value;
+            
+            // Verificar se o código já foi utilizado anteriormente
+            var ultimoUso = localStorage.getItem(codigoInserido);
+            if (ultimoUso) {
+                // Se o código já foi utilizado, exibir a mensagem com a data e hora do último uso
+                document.getElementById("mensagem").innerText = "Código já utilizado em " + ultimoUso;
+            } else {
+                // Se o código não foi utilizado ainda, marcar como utilizado e exibir mensagem de código liberado
+                localStorage.setItem(codigoInserido, new Date().toLocaleString()); // Armazenar a data e hora do uso
+                document.getElementById("mensagem").innerText = "Código Liberado!";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h2>Verificação de Código Secreto</h2>
+    <input type="text" id="codigo" placeholder="Digite o código secreto">
+    <button onclick="verificarCodigo()">Verificar</button>
+    <p id="mensagem"></p>
+</body>
+</html>
